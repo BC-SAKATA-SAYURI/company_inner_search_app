@@ -16,10 +16,15 @@ import constants as ct
 
 def display_sidebar():
     """
-    サイドバーに利用目的と説明を表示
+    サイドバーに回答モード選択・利用目的と説明を表示
     """
     with st.sidebar:
         st.markdown(f"## {ct.APP_NAME}")
+        st.divider()
+        st.session_state.mode = st.radio(
+            label="**回答モード選択**",
+            options=[ct.ANSWER_MODE_1, ct.ANSWER_MODE_2],
+        )
         st.divider()
         st.markdown("**【利用目的と説明】**")
         st.markdown("**社内文書検索**")
