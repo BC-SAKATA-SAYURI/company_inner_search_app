@@ -19,7 +19,6 @@ def display_sidebar():
     サイドバーに回答モード選択・利用目的と説明を表示
     """
     with st.sidebar:
-        #st.markdown(f"## {ct.APP_NAME}")
         st.markdown("**利用目的**")
 
         st.session_state.mode = st.radio(
