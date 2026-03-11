@@ -14,6 +14,22 @@ import constants as ct
 # 関数定義
 ############################################################
 
+def display_sidebar():
+    """
+    サイドバーに利用目的と説明を表示
+    """
+    with st.sidebar:
+        st.markdown(f"## {ct.APP_NAME}")
+        st.divider()
+        st.markdown("**【利用目的と説明】**")
+        st.markdown("**社内文書検索**")
+        st.info("入力内容と関連性が高い社内文書のありかを検索できます。")
+        st.code("【入力例】\n社員の育成方針に関するMTGの議事録", wrap_lines=True, language=None)
+        st.markdown("**社内問い合わせ**")
+        st.info("質問・要望に対して、社内文書の情報をもとに回答を得られます。")
+        st.code("【入力例】\n人事部に所属している従業員情報を一覧化して", wrap_lines=True, language=None)
+
+
 def display_app_title():
     """
     タイトル表示
