@@ -19,18 +19,19 @@ def display_sidebar():
     サイドバーに回答モード選択・利用目的と説明を表示
     """
     with st.sidebar:
-        st.markdown(f"## {ct.APP_NAME}")
+        #st.markdown(f"## {ct.APP_NAME}")
+        st.markdown("**利用目的**")
+
         st.divider()
         st.session_state.mode = st.radio(
             label="**回答モード選択**",
             options=[ct.ANSWER_MODE_1, ct.ANSWER_MODE_2],
         )
         st.divider()
-        st.markdown("**【利用目的と説明】**")
-        st.markdown("**社内文書検索**")
+        st.markdown("**【『社内文章検索』を選択した場合】**")
         st.info("入力内容と関連性が高い社内文書のありかを検索できます。")
         st.code("【入力例】\n社員の育成方針に関するMTGの議事録", wrap_lines=True, language=None)
-        st.markdown("**社内問い合わせ**")
+        st.markdown("**【『社内問い合わせ』を選択した場合】**")
         st.info("質問・要望に対して、社内文書の情報をもとに回答を得られます。")
         st.code("【入力例】\n人事部に所属している従業員情報を一覧化して", wrap_lines=True, language=None)
 
@@ -109,7 +110,7 @@ def display_conversation_log():
                         icon = utils.get_source_icon(message['content']['main_file_path'])
                         # 参照元ドキュメントのページ番号が取得できた場合にのみ、ページ番号を表示
                         if "main_page_number" in message["content"]:
-                            st.success(f"{message['content']['main_file_path']}", icon=icon)
+                            st.success(f"{message['content']['main_file_path']}（p.{message['content']['main_page_number'] + 1}）", icon=icon)
                         else:
                             st.success(f"{message['content']['main_file_path']}", icon=icon)
                         
@@ -126,7 +127,7 @@ def display_conversation_log():
                                 icon = utils.get_source_icon(sub_choice['source'])
                                 # 参照元ドキュメントのページ番号が取得できた場合にのみ、ページ番号を表示
                                 if "page_number" in sub_choice:
-                                    st.info(f"{sub_choice['source']}", icon=icon)
+                                    st.info(f"{sub_choice['source']}（p.{sub_choice['page_number'] + 1}）", icon=icon)
                                 else:
                                     st.info(f"{sub_choice['source']}", icon=icon)
                     # ファイルのありかの情報が取得できなかった場合、LLMからの回答のみ表示
@@ -181,7 +182,7 @@ def display_search_llm_response(llm_response):
             # ページ番号を取得
             main_page_number = llm_response["context"][0].metadata["page"]
             # 「メインドキュメントのファイルパス」と「ページ番号」を表示
-            st.success(f"{main_file_path}", icon=icon)
+            st.success(f"{main_file_path}（p.{main_page_number + 1}）", icon=icon)
         else:
             # 「メインドキュメントのファイルパス」を表示
             st.success(f"{main_file_path}", icon=icon)
@@ -237,7 +238,7 @@ def display_search_llm_response(llm_response):
                 # ページ番号が取得できない場合のための分岐処理
                 if "page_number" in sub_choice:
                     # 「サブドキュメントのファイルパス」と「ページ番号」を表示
-                    st.info(f"{sub_choice['source']}", icon=icon)
+                    st.info(f"{sub_choice['source']}（p.{sub_choice['page_number'] + 1}）", icon=icon)
                 else:
                     # 「サブドキュメントのファイルパス」を表示
                     st.info(f"{sub_choice['source']}", icon=icon)
@@ -317,7 +318,7 @@ def display_contact_llm_response(llm_response):
                 # ページ番号を取得
                 page_number = document.metadata["page"]
                 # 「ファイルパス」と「ページ番号」
-                file_info = f"{file_path}"
+                file_info = f"{file_path}（p.{page_number + 1}）"
             else:
                 # 「ファイルパス」のみ
                 file_info = f"{file_path}"
