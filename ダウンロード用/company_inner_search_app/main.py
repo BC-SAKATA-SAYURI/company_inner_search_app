@@ -84,7 +84,7 @@ except Exception as e:
 ############################################################
 # 6. チャット入力の受け付け
 ############################################################
-#chat_message = st.chat_input(ct.CHAT_INPUT_HELPER_TEXT)
+chat_message = st.chat_input(ct.CHAT_INPUT_HELPER_TEXT)
 
 
 ############################################################
