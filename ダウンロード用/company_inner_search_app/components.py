@@ -23,7 +23,7 @@ def display_sidebar():
         st.markdown("**利用目的**")
 
         st.session_state.mode = st.radio(
-            #label="**回答モード選択**",
+            label="**回答モード選択**",
             options=[ct.ANSWER_MODE_1, ct.ANSWER_MODE_2],
         )
         st.divider()
